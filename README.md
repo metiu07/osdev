@@ -1,4 +1,0 @@
-osdev
-=====
-
-learning ,,osdeving,, 
