@@ -80,7 +80,12 @@ void terminal_putentryat(char c, uint8_t color, size_t x, size_t y) {
 }
 
 void terminal_putchar(char c) {
-	terminal_putentryat(c, terminal_color, terminal_column, terminal_row);
+    if(c == '\n') {
+        terminal_row++;
+        terminal_column = 0;
+    } else {
+        terminal_putentryat(c, terminal_color, terminal_column, terminal_row);
+    }
 	if(++terminal_column == VGA_WIDTH) {
 		terminal_column = 0;
 		if(++terminal_row == VGA_HEIGHT) {
@@ -102,5 +107,5 @@ extern "C"
 
 void kernel_main() {
 	terminal_initialize();
-	terminal_writestring("Hello, world!\n");
+	terminal_writestring("Ahoj svete\n");
 }
