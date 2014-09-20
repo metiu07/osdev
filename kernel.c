@@ -82,7 +82,7 @@ void terminal_putentryat(char c, uint8_t color, size_t x, size_t y) {
 void terminal_putchar(char c) {
     if(c == '\n') {
         terminal_row++;
-        terminal_column = 0;
+        terminal_column = -1;
     } else {
         terminal_putentryat(c, terminal_color, terminal_column, terminal_row);
     }
@@ -90,6 +90,9 @@ void terminal_putchar(char c) {
 		terminal_column = 0;
 		if(++terminal_row == VGA_HEIGHT) {
 			terminal_row = 0;
+			for(size_t y = 0; y <= VGA_HEIGHT; y++) 
+				for(size_t x = 0; x <= VGA_WIDTH; x++) 
+					terminal_buffer[y * VGA_WIDTH + x] = terminal_buffer[(y + 1) * VGA_WIDTH + x];
 		}
 	}
 }
@@ -108,4 +111,6 @@ extern "C"
 void kernel_main() {
 	terminal_initialize();
 	terminal_writestring("Ahoj svete\n");
+	terminal_writestring("Hello, world!\n");
+	terminal_writestring("Mato\n");
 }
