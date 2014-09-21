@@ -109,8 +109,7 @@ extern "C"
 #endif
 
 void kernel_main() {
+	inb();
 	terminal_initialize();
-	terminal_writestring("Ahoj svete\n");
-	terminal_writestring("Hello, world!\n");
-	terminal_writestring("Mato\n");
+	terminal_writestring("Ahoj svete");
 }
