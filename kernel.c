@@ -12,9 +12,6 @@
 #error "This kernel needs to be compiled with a ix86-elf compiler"
 #endif
 
-#include "io.h"
-#include "8259.h"
-
 enum vga_color {
 	COLOR_BLACK = 0,
 	COLOR_BLUE = 1,
@@ -112,7 +109,6 @@ extern "C"
 #endif
 
 void kernel_main() {
-	init8259();
 	terminal_initialize();
 	terminal_writestring("Ahoj svete");
 }
