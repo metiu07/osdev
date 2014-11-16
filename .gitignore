@@ -1,4 +1,8 @@
 boot.o
+bin
+CMakeCache.txt
+CMakeFiles
+cmake_install.cmake
 isodir/
 kernel.o
 myos.bin
