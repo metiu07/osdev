@@ -126,6 +126,38 @@ boot.asm.o:
 	$(MAKE) -f CMakeFiles/myos.bin.dir/build.make CMakeFiles/myos.bin.dir/boot.asm.o
 .PHONY : boot.asm.o
 
+gdt.o: gdt.asm.o
+.PHONY : gdt.o
+
+# target to build an object file
+gdt.asm.o:
+	$(MAKE) -f CMakeFiles/myos.bin.dir/build.make CMakeFiles/myos.bin.dir/gdt.asm.o
+.PHONY : gdt.asm.o
+
+gdt.o: gdt.c.o
+.PHONY : gdt.o
+
+# target to build an object file
+gdt.c.o:
+	$(MAKE) -f CMakeFiles/myos.bin.dir/build.make CMakeFiles/myos.bin.dir/gdt.c.o
+.PHONY : gdt.c.o
+
+gdt.i: gdt.c.i
+.PHONY : gdt.i
+
+# target to preprocess a source file
+gdt.c.i:
+	$(MAKE) -f CMakeFiles/myos.bin.dir/build.make CMakeFiles/myos.bin.dir/gdt.c.i
+.PHONY : gdt.c.i
+
+gdt.s: gdt.c.s
+.PHONY : gdt.s
+
+# target to generate assembly for a file
+gdt.c.s:
+	$(MAKE) -f CMakeFiles/myos.bin.dir/build.make CMakeFiles/myos.bin.dir/gdt.c.s
+.PHONY : gdt.c.s
+
 kernel.o: kernel.c.o
 .PHONY : kernel.o
 
@@ -160,6 +192,10 @@ help:
 	@echo "... myos.bin"
 	@echo "... rebuild_cache"
 	@echo "... boot.o"
+	@echo "... gdt.o"
+	@echo "... gdt.o"
+	@echo "... gdt.i"
+	@echo "... gdt.s"
 	@echo "... kernel.o"
 	@echo "... kernel.i"
 	@echo "... kernel.s"
