@@ -110,5 +110,5 @@ extern "C"
 
 void kernel_main() {
 	terminal_initialize();
-	terminal_writestring("Ahoj svete");
+	terminal_writestring("HELLO WORLD!");
 }
