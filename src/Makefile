@@ -182,6 +182,30 @@ kernel.c.s:
 	$(MAKE) -f CMakeFiles/myos.bin.dir/build.make CMakeFiles/myos.bin.dir/kernel.c.s
 .PHONY : kernel.c.s
 
+stdfunc.o: stdfunc.c.o
+.PHONY : stdfunc.o
+
+# target to build an object file
+stdfunc.c.o:
+	$(MAKE) -f CMakeFiles/myos.bin.dir/build.make CMakeFiles/myos.bin.dir/stdfunc.c.o
+.PHONY : stdfunc.c.o
+
+stdfunc.i: stdfunc.c.i
+.PHONY : stdfunc.i
+
+# target to preprocess a source file
+stdfunc.c.i:
+	$(MAKE) -f CMakeFiles/myos.bin.dir/build.make CMakeFiles/myos.bin.dir/stdfunc.c.i
+.PHONY : stdfunc.c.i
+
+stdfunc.s: stdfunc.c.s
+.PHONY : stdfunc.s
+
+# target to generate assembly for a file
+stdfunc.c.s:
+	$(MAKE) -f CMakeFiles/myos.bin.dir/build.make CMakeFiles/myos.bin.dir/stdfunc.c.s
+.PHONY : stdfunc.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -199,6 +223,9 @@ help:
 	@echo "... kernel.o"
 	@echo "... kernel.i"
 	@echo "... kernel.s"
+	@echo "... stdfunc.o"
+	@echo "... stdfunc.i"
+	@echo "... stdfunc.s"
 .PHONY : help
 
 

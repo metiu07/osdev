@@ -1,5 +1,6 @@
 #include <stdint.h>
 #include "gdt.h"
+#include "stdfunc.h"
 
 struct gdt_entry_s
 {
@@ -33,7 +34,7 @@ void InitializeGDT(void)
     gdt_ptr.limit = (sizeof(gdt_entry_t) * 5) - 1;
     gdt_ptr.base  = (uint32_t)&gdt_entries;
 
-    //memset(&gdt_entries[0], 0, sizeof(gdt_entry_t));
+    memset(&gdt_entries[0], 0, sizeof(gdt_entry_t));
 
     gdt_entries[1].limit_low = 0x0000FFFF;
     gdt_entries[1].base_low = 0;
