@@ -5,6 +5,7 @@
 #include <stdint.h>
 
 #include "gdt.h"
+#include "idt.h"
 #include "stdfunc.h"
 
 #if defined(__linux__)
@@ -103,8 +104,10 @@ void terminal_writestring(const char* data) {
 extern "C"
 #endif
 
-void kernel_main() {
+void kernel_main() 
+{
 	terminal_initialize();
 	terminal_writestring("HELLO WORLD!");
     InitializeGDT();
+	InitializeIDT();
 }

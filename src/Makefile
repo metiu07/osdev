@@ -158,6 +158,70 @@ gdt.c.s:
 	$(MAKE) -f CMakeFiles/myos.bin.dir/build.make CMakeFiles/myos.bin.dir/gdt.c.s
 .PHONY : gdt.c.s
 
+idt.o: idt.asm.o
+.PHONY : idt.o
+
+# target to build an object file
+idt.asm.o:
+	$(MAKE) -f CMakeFiles/myos.bin.dir/build.make CMakeFiles/myos.bin.dir/idt.asm.o
+.PHONY : idt.asm.o
+
+idt.o: idt.c.o
+.PHONY : idt.o
+
+# target to build an object file
+idt.c.o:
+	$(MAKE) -f CMakeFiles/myos.bin.dir/build.make CMakeFiles/myos.bin.dir/idt.c.o
+.PHONY : idt.c.o
+
+idt.i: idt.c.i
+.PHONY : idt.i
+
+# target to preprocess a source file
+idt.c.i:
+	$(MAKE) -f CMakeFiles/myos.bin.dir/build.make CMakeFiles/myos.bin.dir/idt.c.i
+.PHONY : idt.c.i
+
+idt.s: idt.c.s
+.PHONY : idt.s
+
+# target to generate assembly for a file
+idt.c.s:
+	$(MAKE) -f CMakeFiles/myos.bin.dir/build.make CMakeFiles/myos.bin.dir/idt.c.s
+.PHONY : idt.c.s
+
+interrupt.o: interrupt.asm.o
+.PHONY : interrupt.o
+
+# target to build an object file
+interrupt.asm.o:
+	$(MAKE) -f CMakeFiles/myos.bin.dir/build.make CMakeFiles/myos.bin.dir/interrupt.asm.o
+.PHONY : interrupt.asm.o
+
+isr.o: isr.c.o
+.PHONY : isr.o
+
+# target to build an object file
+isr.c.o:
+	$(MAKE) -f CMakeFiles/myos.bin.dir/build.make CMakeFiles/myos.bin.dir/isr.c.o
+.PHONY : isr.c.o
+
+isr.i: isr.c.i
+.PHONY : isr.i
+
+# target to preprocess a source file
+isr.c.i:
+	$(MAKE) -f CMakeFiles/myos.bin.dir/build.make CMakeFiles/myos.bin.dir/isr.c.i
+.PHONY : isr.c.i
+
+isr.s: isr.c.s
+.PHONY : isr.s
+
+# target to generate assembly for a file
+isr.c.s:
+	$(MAKE) -f CMakeFiles/myos.bin.dir/build.make CMakeFiles/myos.bin.dir/isr.c.s
+.PHONY : isr.c.s
+
 kernel.o: kernel.c.o
 .PHONY : kernel.o
 
@@ -220,6 +284,14 @@ help:
 	@echo "... gdt.o"
 	@echo "... gdt.i"
 	@echo "... gdt.s"
+	@echo "... idt.o"
+	@echo "... idt.o"
+	@echo "... idt.i"
+	@echo "... idt.s"
+	@echo "... interrupt.o"
+	@echo "... isr.o"
+	@echo "... isr.i"
+	@echo "... isr.s"
 	@echo "... kernel.o"
 	@echo "... kernel.i"
 	@echo "... kernel.s"
