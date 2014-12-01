@@ -12,7 +12,7 @@ SET(CMAKE_ASM_NASM_FLAGS "-f elf")
 
 enable_language(ASM_NASM)
 
-add_executable(myos.bin boot.asm kernel.c gdt.c idt.c idt.asm gdt.asm stdfunc.c interrupt.asm isr.c)
+add_executable(myos.bin boot.asm kernel.c gdt.c idt.c idt.asm gdt.asm stdfunc.c interrupt.asm terminal.c common.c isr.c)
 INCLUDE_DIRECTORIES(src/include/)
 
 SET_TARGET_PROPERTIES(myos.bin PROPERTIES LINKER_LANGUAGE C CXX ASM)

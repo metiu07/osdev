@@ -126,6 +126,30 @@ boot.asm.o:
 	$(MAKE) -f CMakeFiles/myos.bin.dir/build.make CMakeFiles/myos.bin.dir/boot.asm.o
 .PHONY : boot.asm.o
 
+common.o: common.c.o
+.PHONY : common.o
+
+# target to build an object file
+common.c.o:
+	$(MAKE) -f CMakeFiles/myos.bin.dir/build.make CMakeFiles/myos.bin.dir/common.c.o
+.PHONY : common.c.o
+
+common.i: common.c.i
+.PHONY : common.i
+
+# target to preprocess a source file
+common.c.i:
+	$(MAKE) -f CMakeFiles/myos.bin.dir/build.make CMakeFiles/myos.bin.dir/common.c.i
+.PHONY : common.c.i
+
+common.s: common.c.s
+.PHONY : common.s
+
+# target to generate assembly for a file
+common.c.s:
+	$(MAKE) -f CMakeFiles/myos.bin.dir/build.make CMakeFiles/myos.bin.dir/common.c.s
+.PHONY : common.c.s
+
 gdt.o: gdt.asm.o
 .PHONY : gdt.o
 
@@ -270,6 +294,30 @@ stdfunc.c.s:
 	$(MAKE) -f CMakeFiles/myos.bin.dir/build.make CMakeFiles/myos.bin.dir/stdfunc.c.s
 .PHONY : stdfunc.c.s
 
+terminal.o: terminal.c.o
+.PHONY : terminal.o
+
+# target to build an object file
+terminal.c.o:
+	$(MAKE) -f CMakeFiles/myos.bin.dir/build.make CMakeFiles/myos.bin.dir/terminal.c.o
+.PHONY : terminal.c.o
+
+terminal.i: terminal.c.i
+.PHONY : terminal.i
+
+# target to preprocess a source file
+terminal.c.i:
+	$(MAKE) -f CMakeFiles/myos.bin.dir/build.make CMakeFiles/myos.bin.dir/terminal.c.i
+.PHONY : terminal.c.i
+
+terminal.s: terminal.c.s
+.PHONY : terminal.s
+
+# target to generate assembly for a file
+terminal.c.s:
+	$(MAKE) -f CMakeFiles/myos.bin.dir/build.make CMakeFiles/myos.bin.dir/terminal.c.s
+.PHONY : terminal.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -280,6 +328,9 @@ help:
 	@echo "... myos.bin"
 	@echo "... rebuild_cache"
 	@echo "... boot.o"
+	@echo "... common.o"
+	@echo "... common.i"
+	@echo "... common.s"
 	@echo "... gdt.o"
 	@echo "... gdt.o"
 	@echo "... gdt.i"
@@ -298,6 +349,9 @@ help:
 	@echo "... stdfunc.o"
 	@echo "... stdfunc.i"
 	@echo "... stdfunc.s"
+	@echo "... terminal.o"
+	@echo "... terminal.i"
+	@echo "... terminal.s"
 .PHONY : help
 
 
