@@ -26,7 +26,6 @@ void kernel_main()
 	terminal_writestring("[+]Inicialization of IDT\n");
 	InitializeIDT();
 
-	asm volatile ("int 0x1");
+	asm volatile("int $0x10");
 
-	terminal_writestring("po interupte");
 }
