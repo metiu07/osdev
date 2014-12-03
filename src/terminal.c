@@ -1,4 +1,7 @@
+#include <stddef.h>
 #include "terminal.h" 
+#include "common.h"
+#include "stdfunc.h"
 
 enum vga_color {
 	COLOR_BLACK = 0,
@@ -60,15 +63,18 @@ void terminal_putentryat(char c, uint8_t color, size_t x, size_t y) {
 }
 
 void terminal_putchar(char c) {
-    if(c == '\n') {
-        terminal_row++;
-        terminal_column = -1;
-    } else {
-        terminal_putentryat(c, terminal_color, terminal_column, terminal_row);
-    }
-	if(++terminal_column == VGA_WIDTH) {
+	if(c == '\n') {
+		terminal_row++;
+		terminal_column = -1;
+	} else {
+		terminal_putentryat(c, terminal_color, terminal_column, terminal_row);
+		terminal_moveCursor(terminal_column + 1, terminal_row);
+	}
+	if(++terminal_column == VGA_WIDTH) 
+	{
 		terminal_column = 0;
-		if(++terminal_row == VGA_HEIGHT) {
+		if(++terminal_row == VGA_HEIGHT)
+		{
 			terminal_row = 0;
 			for(size_t y = 0; y <= VGA_HEIGHT; y++) 
 				for(size_t x = 0; x <= VGA_WIDTH; x++) 
@@ -84,4 +90,26 @@ void terminal_writestring(const char* data) {
 	}
 }
 
+void terminal_moveCursor(size_t x, size_t y)
+{
+	size_t index;
 
+	index = y * 80 + x;
+
+	outportb(0x3D4, 14);
+	outportb(0x3D5, index >> 8);
+	outportb(0x3D4, 15);
+	outportb(0x3D5, index);
+}
+
+void terminal_clearScreen() 
+{
+	for(size_t y = 0; y < VGA_HEIGHT; y++) {
+		for(size_t x = 0; x < VGA_WIDTH; x++) {
+			const size_t index = y * VGA_WIDTH + x;
+			terminal_buffer[index] = make_vgaentry(' ', terminal_color);
+		}
+	}
+
+	terminal_moveCursor(0, 0);
+}

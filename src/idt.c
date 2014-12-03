@@ -7,6 +7,8 @@ typedef struct idt_ptr_s   idt_ptr_t;
 idt_entry_t idt_entries[256];
 idt_ptr_t   idtp;
 
+extern void idt_flush(uint32_t);
+
 void idt_set_gate(uint8_t num, uint32_t base, uint16_t sel, uint8_t flags)
 {
 	idt_entries[num].base_lo = base & 0xFFFF;

@@ -6,6 +6,7 @@
 #include "idt.h"
 #include "terminal.h"
 #include "stdfunc.h"
+#include "common.h"
 
 #if defined(__linux__)
 #error "Na skompilovanie nebol pouzity cross-compiler."
@@ -25,7 +26,5 @@ void kernel_main()
 
 	terminal_writestring("[+]Inicialization of IDT\n");
 	InitializeIDT();
-
-	asm volatile("int $0x10");
 
 }

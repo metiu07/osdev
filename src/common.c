@@ -39,3 +39,15 @@ char* atoi(int value, char * str, int base)
 
 	return rc;
 }
+
+unsigned char inportb(unsigned short port)
+{
+	unsigned char output;
+	asm volatile ("inb %1, %0" : "=a" (output) : "dN" (port));
+	return output;
+}
+
+void outportb(unsigned short port, unsigned char data)
+{
+	asm volatile("outb %1, %0" : : "dN" (port), "a" (data));
+}
