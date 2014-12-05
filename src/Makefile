@@ -270,6 +270,30 @@ kernel.c.s:
 	$(MAKE) -f CMakeFiles/myos.bin.dir/build.make CMakeFiles/myos.bin.dir/kernel.c.s
 .PHONY : kernel.c.s
 
+keyboard.o: keyboard.c.o
+.PHONY : keyboard.o
+
+# target to build an object file
+keyboard.c.o:
+	$(MAKE) -f CMakeFiles/myos.bin.dir/build.make CMakeFiles/myos.bin.dir/keyboard.c.o
+.PHONY : keyboard.c.o
+
+keyboard.i: keyboard.c.i
+.PHONY : keyboard.i
+
+# target to preprocess a source file
+keyboard.c.i:
+	$(MAKE) -f CMakeFiles/myos.bin.dir/build.make CMakeFiles/myos.bin.dir/keyboard.c.i
+.PHONY : keyboard.c.i
+
+keyboard.s: keyboard.c.s
+.PHONY : keyboard.s
+
+# target to generate assembly for a file
+keyboard.c.s:
+	$(MAKE) -f CMakeFiles/myos.bin.dir/build.make CMakeFiles/myos.bin.dir/keyboard.c.s
+.PHONY : keyboard.c.s
+
 stdfunc.o: stdfunc.c.o
 .PHONY : stdfunc.o
 
@@ -346,6 +370,9 @@ help:
 	@echo "... kernel.o"
 	@echo "... kernel.i"
 	@echo "... kernel.s"
+	@echo "... keyboard.o"
+	@echo "... keyboard.i"
+	@echo "... keyboard.s"
 	@echo "... stdfunc.o"
 	@echo "... stdfunc.i"
 	@echo "... stdfunc.s"

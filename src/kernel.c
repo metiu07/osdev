@@ -4,6 +4,7 @@
 
 #include "gdt.h"
 #include "idt.h"
+#include "keyboard.h"
 #include "terminal.h"
 #include "stdfunc.h"
 #include "common.h"
@@ -27,4 +28,8 @@ void kernel_main()
 	terminal_writestring("[+]Inicialization of IDT\n");
 	InitializeIDT();
 
+	terminal_writestring("[+]Inicialization of Keyboard\n");
+	InitializeKeyboard();
+	
+	asm volatile("int $0x21");
 }
