@@ -63,17 +63,46 @@ void terminal_putentryat(char c, uint8_t color, size_t x, size_t y) {
 }
 
 void terminal_putchar(char c) {
-	if(c == '\n') {
-		terminal_row++;
+
+    if(c == 0)
+    {
+        return;
+    }
+
+    switch(c)
+    {
+    case '\n':
+        terminal_row++;
 		terminal_column = -1;
-	} else {
-		terminal_putentryat(c, terminal_color, terminal_column, terminal_row);
 		terminal_moveCursor(terminal_column + 1, terminal_row);
+        break;
+    case '\b':
+        if(terminal_column < 1)
+        {
+            terminal_row -= 1;
+            terminal_column = -1;
+        }
+        else 
+            terminal_column -= 2;
+
+        terminal_moveCursor(terminal_column + 1, terminal_row);
+        terminal_putentryat(' ', terminal_color, terminal_column + 1, terminal_row);
+        break;
+    case '\t':
+        terminal_column += 3;
+        terminal_moveCursor(terminal_column + 1, terminal_row);
+    case '0':
+        break;
+    default:
+        terminal_putentryat(c, terminal_color, terminal_column, terminal_row);
+		terminal_moveCursor(terminal_column + 1, terminal_row);
+        break;
 	}
-	if(++terminal_column == VGA_WIDTH) 
+    
+	if(terminal_column + 1 == VGA_WIDTH) 
 	{
 		terminal_column = 0;
-		if(++terminal_row == VGA_HEIGHT)
+		if(terminal_row + 1 == VGA_HEIGHT)
 		{
 			terminal_row = 0;
 			for(size_t y = 0; y <= VGA_HEIGHT; y++) 
@@ -81,6 +110,8 @@ void terminal_putchar(char c) {
 					terminal_buffer[y * VGA_WIDTH + x] = terminal_buffer[(y + 1) * VGA_WIDTH + x];
 		}
 	}
+
+    terminal_column++;
 }
 
 void terminal_writestring(const char* data) {
