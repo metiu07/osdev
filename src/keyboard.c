@@ -83,8 +83,9 @@ const uint8_t usascii_kbd_shift[128] =
 bool shift = false;
 bool caps = false;
 
-void keyboard_handler(struct registers_t regs) 
+void keyboard_handler() 
 {
+
 	uint8_t scancode = inportb(0x60);
 
 	if (scancode & 0x80)
@@ -120,5 +121,5 @@ void keyboard_handler(struct registers_t regs)
 
 void InitializeKeyboard()
 {
-	register_interupt_handler(33, &keyboard_handler);	
+	register_interupt_handler(IRQ1, &keyboard_handler);	
 }

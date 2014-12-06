@@ -30,6 +30,10 @@ void kernel_main()
 
 	terminal_writestring("[+]Inicialization of Keyboard\n");
 	InitializeKeyboard();
-	
-	asm volatile("int $0x21");
+
+	while(true)
+	{
+		
+	}
+
 }
