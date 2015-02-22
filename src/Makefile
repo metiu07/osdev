@@ -11,7 +11,7 @@ AFLAGS := -f elf
 LD := ~/opt/cross/bin/i686-elf-gcc
 LDFLAGS := -T linker.ld -ffreestanding -O2 -nostdlib -lgcc
 
-#Target
+#Target - name of executable
 TARGET := myos.bin
 
 #Directories
@@ -21,6 +21,7 @@ CSOURCES := $(foreach DIR, $(SRCDIRS), $(wildcard $(DIR)/*.c))
 ASMOBJECTS := $(CSOURCES:%.c=%.c.o)
 COBJECTS := $(ASMSOURCES:%.asm=%.asm.o)
 
+#Default target
 .PHONY : all
 all : $(TARGET)
 
@@ -35,6 +36,19 @@ $(TARGET) : $(COBJECTS) $(ASMOBJECTS)
 #Compiling C Sources
 %.c.o : %.c
 	$(CC) $(CFLAGS) $(CINCLUDES) -o $@ -c $<
+
+#Run Qemu with os binary
+qemu : $(TARGET)
+	qemu-system-i386 -s -kernel myos.bin
+
+#Run Qemu in debug mode -> default $gdb myos.bin
+#								   $target remote localhost:1234
+qemu-debug : $(TARGET)
+	qemu-system-i386 -s -S -kernel myos.bin
+
+#Run Qemu in curses mode
+qemu-curses : $(TARGET)
+	qemu-system-i386 -s -curses -kernel myos.bin
 
 #Remove executables and object files
 clean : 
