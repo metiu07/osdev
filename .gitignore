@@ -1,12 +1,3 @@
-boot.o
-bin
-CMakeCache.txt
-CMakeFiles
-cmake_install.cmake
 isodir/
 .DS_Store
-kernel.o
-myos.bin
 myos.iso
-gazos-source
-tags
