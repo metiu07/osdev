@@ -1,16 +1,3 @@
-#C compiler
-CINCLUDES=-Iinclude/
-CC := ~/opt/cross/bin/i686-elf-gcc
-CFLAGS := -g -std=gnu99 -ffreestanding -O2 -Wall -Wextra
-
-#Assembler
-AA := /usr/local/bin/nasm
-AFLAGS := -f elf
-
-#Linker
-LD := ~/opt/cross/bin/i686-elf-gcc
-LDFLAGS := -T linker.ld -ffreestanding -O2 -nostdlib -lgcc
-
 #Target - name of executable
 TARGET := myos.bin
 
