@@ -1,6 +1,8 @@
 #Target - name of executable
 TARGET := myos.bin
 
+include check_compiler.mk
+
 #Directories
 SRCDIRS := kernel lib keyboard shell 
 ASMSOURCES := $(foreach DIR, $(SRCDIRS), $(wildcard $(DIR)/*.asm))
