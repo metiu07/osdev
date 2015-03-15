@@ -40,6 +40,7 @@ size_t terminal_column;
 uint8_t terminal_color;
 uint16_t* terminal_buffer;
 
+//Intialize terminal
 void terminal_initialize() {
 	terminal_row = 0;
 	terminal_column = 0;
@@ -99,10 +100,11 @@ void terminal_putchar(char c) {
         break;
 	}
     
-	if(terminal_column + 1 == VGA_WIDTH) 
+	if(terminal_column == VGA_WIDTH) 
 	{
 		terminal_column = 0;
-		if(terminal_row + 1 == VGA_HEIGHT)
+        terminal_row++;
+		if(terminal_row == VGA_HEIGHT)
 		{
 			terminal_row = 0;
 			for(size_t y = 0; y <= VGA_HEIGHT; y++) 
@@ -114,6 +116,7 @@ void terminal_putchar(char c) {
     terminal_column++;
 }
 
+//Writes a string to display 
 void terminal_writestring(const char* data) {
 	size_t datalen = strlen(data);
 	for(size_t i = 0; i < datalen; i++) {
@@ -121,6 +124,7 @@ void terminal_writestring(const char* data) {
 	}
 }
 
+//Moves cursor to [x, y] position
 void terminal_moveCursor(size_t x, size_t y)
 {
 	size_t index;
@@ -133,6 +137,7 @@ void terminal_moveCursor(size_t x, size_t y)
 	outportb(0x3D5, index);
 }
 
+//Clears display
 void terminal_clearScreen() 
 {
 	for(size_t y = 0; y < VGA_HEIGHT; y++) {
