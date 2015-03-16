@@ -8,6 +8,7 @@
 #include "terminal.h"
 #include "stdfunc.h"
 #include "common.h"
+#include "timer.h"
 
 #if defined(__linux__)
 #error "Na skompilovanie nebol pouzity cross-compiler."
@@ -27,6 +28,9 @@ void kernel_main()
 
 	terminal_writestring("[+]Inicialization of IDT\n");
 	InitializeIDT();
+
+    terminal_writestring("[+]Inicialization of timer\n");
+    InitializeTimer(50);
 
 	terminal_writestring("[+]Inicialization of Keyboard\n");
 	InitializeKeyboard();
