@@ -7,8 +7,6 @@ uint32_t tick = 0;
 
 static void timer_tick() {
     tick++;
-    terminal_writestring("Tick je: ");
-    terminal_writestring("\n");
 }
 
 void InitializeTimer(uint32_t freq) {

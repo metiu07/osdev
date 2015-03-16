@@ -35,6 +35,9 @@ void kernel_main()
 	terminal_writestring("[+]Inicialization of Keyboard\n");
 	InitializeKeyboard();
 
+    terminal_putentryat("\n\n");
+    terminal_puchar(getCharAt(0, 0));
+
 	while(true)
 	{
 		

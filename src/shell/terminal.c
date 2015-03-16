@@ -22,10 +22,12 @@ enum vga_color {
 	COLOR_WHITE = 15,
 };
 
+//Creates color
 uint8_t make_color(enum vga_color fg, enum vga_color bg) {
 	return fg | bg << 4;
 }
 
+//Creates char suitable for writing to memory
 uint16_t make_vgaentry(char c, uint8_t color) {
 	uint16_t c16 = c;
 	uint16_t color16 = color;
@@ -54,15 +56,18 @@ void terminal_initialize() {
 	}
 }
 
+//Sets color of terminal
 void terminal_setcolor(uint8_t color) {
 	terminal_color = color;
 }
 
+//Displays one char at given location
 void terminal_putentryat(char c, uint8_t color, size_t x, size_t y) {
 	const size_t index = y * VGA_WIDTH + x;
 	terminal_buffer[index] = make_vgaentry(c, color);
 }
 
+//Displays one char
 void terminal_putchar(char c) {
 
     if(c == 0)
@@ -137,6 +142,16 @@ void terminal_moveCursor(size_t x, size_t y)
 	outportb(0x3D5, index);
 }
 
+//Moves screen one line down
+void move_screen()
+{
+   for(size_t i = 0; i < VGA_WIDTH * (VGA_HEIGHT - 1); i++) {
+
+       terminal_buffer[i] = 0;
+
+   }
+}
+
 //Clears display
 void terminal_clearScreen() 
 {
@@ -148,4 +163,10 @@ void terminal_clearScreen()
 	}
 
 	terminal_moveCursor(0, 0);
+}
+
+//Gets character at given location
+char terminal_getcharat(size_t x, size_t y)
+{
+    return terminal_buffer[y * VGA_WIDTH + x];
 }
