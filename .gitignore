@@ -1,3 +1,4 @@
 isodir/
 .DS_Store
 myos.iso
+*.swp
