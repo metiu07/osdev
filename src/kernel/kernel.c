@@ -18,25 +18,23 @@
 #error "Kernel musi byt skompilovany cross-compilerom."
 #endif
 
+//Entry point for kernel
 void kernel_main() 
 {
 	terminal_initialize();
 	terminal_writestring("HELLO WORLD!\n");
 
-	terminal_writestring("[+]Inicialization of GDT\n");
+	terminal_writestring("[+]Initialization of GDT\n");
     InitializeGDT();
 
-	terminal_writestring("[+]Inicialization of IDT\n");
+	terminal_writestring("[+]Initialization of IDT\n");
 	InitializeIDT();
 
-    terminal_writestring("[+]Inicialization of timer\n");
-    InitializeTimer(50);
+    terminal_writestring("[+]Initialization of Timer\n");
+    InitializeTimer(500);
 
-	terminal_writestring("[+]Inicialization of Keyboard\n");
+	terminal_writestring("[+]Initialization of Keyboard\n");
 	InitializeKeyboard();
-
-    terminal_putentryat("\n\n");
-    terminal_puchar(getCharAt(0, 0));
 
 	while(true)
 	{

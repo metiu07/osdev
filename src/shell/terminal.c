@@ -1,4 +1,5 @@
 #include <stddef.h>
+
 #include "terminal.h" 
 #include "common.h"
 #include "stdfunc.h"
@@ -22,7 +23,7 @@ enum vga_color {
 	COLOR_WHITE = 15,
 };
 
-//Creates color
+//Make a color
 uint8_t make_color(enum vga_color fg, enum vga_color bg) {
 	return fg | bg << 4;
 }
@@ -61,10 +62,16 @@ void terminal_setcolor(uint8_t color) {
 	terminal_color = color;
 }
 
-//Displays one char at given location
+//Displays one char at given location with given color
 void terminal_putentryat(char c, uint8_t color, size_t x, size_t y) {
 	const size_t index = y * VGA_WIDTH + x;
 	terminal_buffer[index] = make_vgaentry(c, color);
+}
+
+//Displays one char at given location
+void terminal_putcharat(char c, size_t x, size_t y) {
+	const size_t index = y * VGA_WIDTH + x;
+	terminal_buffer[index] = make_vgaentry(c, terminal_color);
 }
 
 //Displays one char
@@ -80,7 +87,7 @@ void terminal_putchar(char c) {
     case '\n':
         terminal_row++;
 		terminal_column = -1;
-		terminal_moveCursor(terminal_column + 1, terminal_row);
+		terminal_movecursor(terminal_column + 1, terminal_row);
         break;
     case '\b':
         if(terminal_column < 1)
@@ -91,17 +98,18 @@ void terminal_putchar(char c) {
         else 
             terminal_column -= 2;
 
-        terminal_moveCursor(terminal_column + 1, terminal_row);
+        terminal_movecursor(terminal_column + 1, terminal_row);
         terminal_putentryat(' ', terminal_color, terminal_column + 1, terminal_row);
         break;
     case '\t':
-        terminal_column += 3;
-        terminal_moveCursor(terminal_column + 1, terminal_row);
+        terminal_column += 4;
+        terminal_movecursor(terminal_column + 1, terminal_row);
+        break;
     case '0':
         break;
     default:
         terminal_putentryat(c, terminal_color, terminal_column, terminal_row);
-		terminal_moveCursor(terminal_column + 1, terminal_row);
+		terminal_movecursor(terminal_column + 1, terminal_row);
         break;
 	}
     
@@ -109,14 +117,13 @@ void terminal_putchar(char c) {
 	{
 		terminal_column = 0;
         terminal_row++;
-		if(terminal_row == VGA_HEIGHT)
-		{
-			terminal_row = 0;
-			for(size_t y = 0; y <= VGA_HEIGHT; y++) 
-				for(size_t x = 0; x <= VGA_WIDTH; x++) 
-					terminal_buffer[y * VGA_WIDTH + x] = terminal_buffer[(y + 1) * VGA_WIDTH + x];
-		}
+		
 	}
+
+    if(terminal_row == VGA_HEIGHT)
+    {
+        terminal_clearscreen();
+    }
 
     terminal_column++;
 }
@@ -130,7 +137,7 @@ void terminal_writestring(const char* data) {
 }
 
 //Moves cursor to [x, y] position
-void terminal_moveCursor(size_t x, size_t y)
+void terminal_movecursor(size_t x, size_t y)
 {
 	size_t index;
 
@@ -143,17 +150,19 @@ void terminal_moveCursor(size_t x, size_t y)
 }
 
 //Moves screen one line down
-void move_screen()
+void terminal_movescreen()
 {
+
    for(size_t i = 0; i < VGA_WIDTH * (VGA_HEIGHT - 1); i++) {
 
        terminal_buffer[i] = 0;
 
    }
+
 }
 
 //Clears display
-void terminal_clearScreen() 
+void terminal_clearscreen() 
 {
 	for(size_t y = 0; y < VGA_HEIGHT; y++) {
 		for(size_t x = 0; x < VGA_WIDTH; x++) {
@@ -162,7 +171,10 @@ void terminal_clearScreen()
 		}
 	}
 
-	terminal_moveCursor(0, 0);
+    terminal_row = 0;
+    terminal_column = 0;
+
+	terminal_movecursor(terminal_row, terminal_column--);
 }
 
 //Gets character at given location

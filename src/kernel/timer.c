@@ -3,12 +3,21 @@
 #include "common.h"
 #include "isr.h"
 
-uint32_t tick = 0;
+static uint32_t tick = 0;
 
-static void timer_tick() {
+//IRQ rountine for irq0
+static void timer_tick() 
+{
     tick++;
 }
 
+//Returns tick count
+uint32_t timer_gettick()
+{
+    return tick;
+}
+
+//Initialize timer with given frequency
 void InitializeTimer(uint32_t freq) {
 
     register_interupt_handler(IRQ0, &timer_tick);
