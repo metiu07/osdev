@@ -12,6 +12,7 @@ void terminal_putcharat(char c, size_t x, size_t y);
 void terminal_movecursor(size_t x, size_t y);
 void terminal_movescreen();
 void terminal_clearscreen();
+char* terminal_getline(size_t line);
 char terminal_getcharat(size_t x, size_t y);
 
 #endif

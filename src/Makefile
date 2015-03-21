@@ -40,6 +40,10 @@ qemu-debug : $(TARGET)
 qemu-curses : $(TARGET)
 	qemu-system-i386 -s -curses -kernel myos.bin
 
+#Generate ctags file
+ctags : 
+	$(CT) -R .
+
 #Remove executables and object files
 clean : 
 	$(RM) myos.bin

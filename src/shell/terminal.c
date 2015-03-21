@@ -122,7 +122,7 @@ void terminal_putchar(char c) {
 
     if(terminal_row == VGA_HEIGHT)
     {
-        terminal_clearscreen();
+        terminal_movescreen();
     }
 
     terminal_column++;
@@ -155,9 +155,18 @@ void terminal_movescreen()
 
    for(size_t i = 0; i < VGA_WIDTH * (VGA_HEIGHT - 1); i++) {
 
-       terminal_buffer[i] = 0;
+       terminal_buffer[i] = terminal_buffer[i + VGA_WIDTH];
 
    }
+
+   terminal_row--;
+   terminal_column = 0;
+
+   for(size_t i = 0; i < VGA_WIDTH; i++) {
+       terminal_buffer[VGA_WIDTH * (VGA_HEIGHT - 1) + i] = make_vgaentry(' ', terminal_color);
+   }
+
+   terminal_movecursor(terminal_column--, terminal_row);
 
 }
 
@@ -175,6 +184,17 @@ void terminal_clearscreen()
     terminal_column = 0;
 
 	terminal_movecursor(terminal_row, terminal_column--);
+}
+
+//Returns line as char*
+//TODO: BROKEN -> Causes Interupt 13!
+//Do not use!
+char* terminal_getline(size_t line)
+{
+    char* p;
+    memcpy(&p, &terminal_buffer[VGA_WIDTH * line], VGA_WIDTH);
+    p[VGA_WIDTH + 1] = '\0';
+    return p;
 }
 
 //Gets character at given location

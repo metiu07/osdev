@@ -6,13 +6,11 @@ isr_t interrupt_handlers[256];
 
 void isr_handler(struct registers_t regs)
 {
-	//do some writing
-	terminal_writestring("Interupt HURAAA!");	
+	terminal_writestring("[-]Interupt: ");	
 
- 	char* slovo = 0;
-	slovo =	atoi(regs.int_no, slovo, 10);
+	terminal_writestring(itoa(regs.int_no, 10));
 
-	terminal_writestring(slovo);
+    terminal_writestring("\n");
 }
 
 void irq_handler(struct registers_t regs)
