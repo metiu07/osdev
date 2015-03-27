@@ -28,6 +28,10 @@ uint8_t make_color(enum vga_color fg, enum vga_color bg) {
 	return fg | bg << 4;
 }
 
+uint8_t make_color_s(size_t fg, size_t bg) {
+    return fg | bg << 4;
+}
+
 //Creates char suitable for writing to memory
 uint16_t make_vgaentry(char c, uint8_t color) {
 	uint16_t c16 = c;
@@ -181,24 +185,33 @@ void terminal_clearscreen()
 	}
 
     terminal_row = 0;
-    terminal_column = 0;
+    terminal_column = 1;
 
 	terminal_movecursor(terminal_row, terminal_column--);
 }
 
-//Returns line as char*
-//TODO: BROKEN -> Causes Interupt 13!
-//Do not use!
-char* terminal_getline(size_t line)
+//Saves terminal line into suplied buffer
+char* terminal_getline(size_t line, char* buf)
 {
-    char* p;
-    memcpy(&p, &terminal_buffer[VGA_WIDTH * line], VGA_WIDTH);
-    p[VGA_WIDTH + 1] = '\0';
-    return p;
+
+    for(size_t x = 0; x < VGA_WIDTH; x++)
+    {
+        
+        buf[x] = terminal_getcharat(x, line);
+
+    }
+
+    buf[VGA_WIDTH] = '\0';
+
+    return &buf[0];
+
 }
 
 //Gets character at given location
 char terminal_getcharat(size_t x, size_t y)
 {
-    return terminal_buffer[y * VGA_WIDTH + x];
+
+    uint8_t character = terminal_buffer[y * VGA_WIDTH + x];
+
+    return character;
 }

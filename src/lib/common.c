@@ -1,43 +1,20 @@
 #include "common.h"
 
-char* atoi(int value, char * str, int base)
+int atoi(char *s)
 {
+    int i,num=0,sign=1;
 
-	char* rc;
-	char* ptr;
-	char* low;
-
-	if ( base < 2 || base > 36)
-	{
-		*str = '\0';
-		return str;
-	}
-
-	rc = ptr = str;
-
-	if( value < 0 && base == 10)
-	{
-		*ptr++ = '-';
-	}
-
-	low = ptr;
-
-	do
-	{
-		*ptr++ = "zyxwvutsrqponmlkjihgfedcba9876543210123456789abcdefghijklmnopqrstuvwxyz"[35 + value % base];
-		value /= base;
-	} while(value);
-
-	*ptr-- = '\0';
-
-	while(low < ptr)
-	{
-		char tmp = *low;
-		*low++ = *ptr;
-		*ptr-- = tmp;
-	}
-
-	return rc;
+    for(i=0;s[i];i++)
+        {
+                if(s[i]==' ')
+                        continue;
+                else if(s[i]=='-') sign=-1;
+                else break;
+        }
+        
+        for(;s[i] && s[i]>='0' && s[i]<='9';i++)
+                num=num*10 + s[i]-'0';
+        return num*sign;
 }
 
 //Converts given integer to char

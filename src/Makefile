@@ -29,12 +29,12 @@ $(TARGET) :  $(ASMOBJECTS) $(COBJECTS)
 
 #Run Qemu with os binary
 qemu : $(TARGET)
-	qemu-system-i386 -s -kernel myos.bin
+	qemu-system-i386 -s -monitor stdio -kernel myos.bin
 
 #Run Qemu in debug mode -> default $gdb myos.bin
 #								   $target remote localhost:1234
 qemu-debug : $(TARGET)
-	qemu-system-i386 -s -S -kernel myos.bin
+	qemu-system-i386 -s -S -monitor stdio -kernel myos.bin
 
 #Run Qemu in curses mode
 qemu-curses : $(TARGET)
