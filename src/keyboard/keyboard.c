@@ -1,8 +1,9 @@
+#include <stdbool.h>
+
 #include "keyboard.h"
 #include "common.h"
 #include "terminal.h"
 #include "isr.h"
-#include <stdbool.h>
 
 const uint8_t usascii_kbd[128] = 
 {
@@ -83,6 +84,35 @@ const uint8_t usascii_kbd_shift[128] =
 bool shift = false;
 bool caps = false;
 
+char keyboard_buffer[KEYBOARD_BUFFER_SIZE];
+uint16_t keyboard_buffersize = 0;
+
+void keyboard_bufferclear()
+{
+    keyboard_buffersize = 0;
+}
+
+void keyboard_bufferwrite(char c)
+{
+    if(keyboard_buffersize < KEYBOARD_BUFFER_SIZE)
+    {
+        keyboard_buffer[keyboard_buffersize] = c;
+        keyboard_buffersize++;
+    }
+}
+
+char getchar()
+{
+    if(keyboard_buffersize)
+    {
+        keyboard_buffersize--;
+        return keyboard_buffer[keyboard_buffersize];
+    }
+
+    return 0;
+
+}
+
 void keyboard_handler() 
 {
 
@@ -101,24 +131,25 @@ void keyboard_handler()
 		if (scancode == 0x3A)
 			caps = !caps;
 
+
 		if (shift)
 		{
-			
 			if (caps)
-				terminal_putchar(usascii_kbd[scancode]);
+				keyboard_bufferwrite(usascii_kbd[scancode]);
 			else 
-				terminal_putchar(usascii_kbd_shift[scancode]);
+				keyboard_bufferwrite(usascii_kbd_shift[scancode]);
 		}
 		else
 		{
 			if (caps)
-				terminal_putchar(usascii_kbd_shift[scancode]);
+				keyboard_bufferwrite(usascii_kbd_shift[scancode]);
 			else
-				terminal_putchar(usascii_kbd[scancode]);
+				keyboard_bufferwrite(usascii_kbd[scancode]);
 		}
 	}
 }
 
+//When IRQ1 is triggered call keyboard_handler
 void InitializeKeyboard()
 {
 	register_interupt_handler(IRQ1, &keyboard_handler);	

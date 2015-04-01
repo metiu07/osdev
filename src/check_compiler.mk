@@ -20,10 +20,10 @@ endif
 
 #C flags
 CINCLUDES=-Iinclude/
-CFLAGS := -g -std=gnu99 -ffreestanding -O2 -Wall -Wextra
+CFLAGS := -g -std=gnu99 -ffreestanding -O2 -Wall -Wextra -ggdb
 
 #Assembler flags
 AFLAGS := -f elf
 
 #Linker flags
-LDFLAGS := -T linker.ld -ffreestanding -O2 -nostdlib -lgcc
+LDFLAGS := -T linker.ld -ffreestanding -O2 -nostdlib -lgcc -g
