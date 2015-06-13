@@ -70,17 +70,32 @@ void shell_command_color(int argc, char *argv[])
     if (argc == 2) {
         size_t fg = atoi(argv[1]);
         size_t bg = atoi(argv[2]);
-        terminal_setcolor(make_color_s(fg, bg));
+        //terminal_setcolor(make_color_s(fg, bg));
     } else {
-        terminal_writestring("Zadal si nepravny pocet argumentov: ");
+        terminal_writestring("Zadal si nepravny pocet parametrov: ");
         terminal_writestring(itoa(argc, 10));
+        terminal_writestring(" ");
+        terminal_writestring(argv[2]);
         terminal_putchar('\n');
     }
 }
 
-void shell_command_test()
+void shell_command_test(int argc, char* argv[])
 {
     terminal_writestring("Test message!\n");
+    terminal_writestring("Zadany pocet parametrov: ");
+    terminal_writestring(itoa(argc, 10));
+    terminal_putchar('\n');
+
+
+    for(int x = 0; x < argc; x++) {
+        terminal_writestring(itoa(x + 1, 10));
+        terminal_writestring(". Parameter: ");
+        terminal_writestring(argv[x + 1]);
+        terminal_putchar('\n');
+    }
+    
+    terminal_putchar('\n');
 }
 
 void shell_command_exit()
@@ -123,7 +138,7 @@ void shell_interpreter(char *command)
 
     if(strcmp(argv[0], "test") == 0)
     {
-        shell_command_test();
+        shell_command_test(argc, argv);
     }
     else if (strcmp(argv[0], "help") == 0)
     {
@@ -157,7 +172,6 @@ void shell_interpreter(char *command)
 void InitializeShell()
 {
     terminal_writestring("MatoOS\n");
-    terminal_writestring("Gymnazium Ivana Kupca Hlohovec\n");
     terminal_writestring("Pre pomoc pouzi prikaz help\n");
 
     shell_clear();

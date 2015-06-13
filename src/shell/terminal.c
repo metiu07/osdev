@@ -23,7 +23,7 @@ enum vga_color {
 	COLOR_WHITE = 15,
 };
 
-//Make a color
+//Generate color for terminal interface
 uint8_t make_color(enum vga_color fg, enum vga_color bg) {
 	return fg | bg << 4;
 }
@@ -32,7 +32,7 @@ uint8_t make_color_s(size_t fg, size_t bg) {
     return fg | bg << 4;
 }
 
-//Creates char suitable for writing to memory
+//Create char suitable for writing to memory
 uint16_t make_vgaentry(char c, uint8_t color) {
 	uint16_t c16 = c;
 	uint16_t color16 = color;

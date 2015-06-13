@@ -1,5 +1,6 @@
 #include "common.h"
 
+//Convert given asci representation to integer
 int atoi(char *s)
 {
     int i,num=0,sign=1;
