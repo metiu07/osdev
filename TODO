@@ -1,8 +1,12 @@
 ->Plans
--compiling outside of source
+-call BIOS functions from protected mode
+-detect memory size
+-filesystem
 -implement some more commands for shell
 -paging
 -simple memory manager
 -elf executables
+-compiling outside of source
+-multitasking
 ...
 -GUI
