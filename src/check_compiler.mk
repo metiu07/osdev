@@ -1,22 +1,26 @@
 #Check for system and the accordingly set compiler
 UNAME_S := $(shell uname -s)
 
+#Cross compiler location
+CROSS_PREFIX := ~/opt/cross/bin/i686-elf-
+
 #If system is linux
 ifeq ($(UNAME_S),Linux)
-	CC := ~/opt/cross/bin/i686-elf-gcc
+	CC := $(CROSS_PREFIX)gcc
 	AA := nasm
-	LD := ~/opt/cross/bin/i686-elf-gcc
+	LD := $(CROSS_PREFIX)gcc
 	CT := ctags
+	OC := $(CROSS_PREFIX)objcopy
 endif
 
 #If system is mac
 ifeq ($(UNAME_S),Darwin)
-	CC := ~/opt/cross/bin/i686-elf-gcc
+	CC := $(CROSS_PREFIX)gcc
     AA := /usr/local/bin/nasm
-    LD := ~/opt/cross/bin/i686-elf-gcc
+    LD := $(CROSS_PREFIX)gcc
 	CT := /usr/local/Cellar/ctags/5.8/bin/ctags
+	OC := $(CROSS_PREFIX)objcopy
 endif
-
 
 #C flags
 CINCLUDES=-Iinclude/

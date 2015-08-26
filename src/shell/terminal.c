@@ -81,11 +81,6 @@ void terminal_putcharat(char c, size_t x, size_t y) {
 //Displays one char
 void terminal_putchar(char c) {
 
-    if(c == 0)
-    {
-        return;
-    }
-
     switch(c)
     {
     case '\n':
@@ -108,8 +103,6 @@ void terminal_putchar(char c) {
     case '\t':
         terminal_column += 4;
         terminal_movecursor(terminal_column + 1, terminal_row);
-        break;
-    case '0':
         break;
     default:
         terminal_putentryat(c, terminal_color, terminal_column, terminal_row);

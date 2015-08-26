@@ -37,6 +37,8 @@ void kernel_main()
 	terminal_writestring("[+]Initialization of Keyboard\n");
 	InitializeKeyboard();
 
+    terminal_writestring(itoa('0', 10));
+
     terminal_writestring("[+]Initialization of Shell\n");
     InitializeShell();
 

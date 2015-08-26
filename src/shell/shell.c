@@ -68,8 +68,8 @@ void shell_command_clear()
 void shell_command_color(int argc, char *argv[])
 {
     if (argc == 2) {
-        size_t fg = atoi(argv[1]);
-        size_t bg = atoi(argv[2]);
+        uint8_t fg = atoi(argv[1]);
+        uint8_t bg = atoi(argv[2]);
         terminal_setcolor(make_color_s(fg, bg));
     } else {
         terminal_writestring("Zadal si nepravny pocet argumentov: ");
@@ -78,9 +78,11 @@ void shell_command_color(int argc, char *argv[])
     }
 }
 
-void shell_command_test()
+void shell_command_test(int argc, char *argv[])
 {
     terminal_writestring("Test message!\n");
+    terminal_writestring(argv[0]);
+    terminal_putchar('\n');
 }
 
 void shell_command_exit()
@@ -123,7 +125,7 @@ void shell_interpreter(char *command)
 
     if(strcmp(argv[0], "test") == 0)
     {
-        shell_command_test();
+        shell_command_test(argc, argv);
     }
     else if (strcmp(argv[0], "help") == 0)
     {

@@ -33,7 +33,7 @@ qemu : $(TARGET)
 
 #Run Qemu in debug mode -> default $gdb myos.bin
 #								   $target remote localhost:1234
-qemu-debug : $(TARGET)
+qemu-debug : $(TARGET) debug-syms
 	qemu-system-i386 -s -S -monitor stdio -kernel myos.bin
 
 #Run Qemu in curses mode
@@ -44,7 +44,13 @@ qemu-curses : $(TARGET)
 ctags : 
 	$(CT) -R .
 
+#Generate and strip debuging symbols
+debug-syms:
+	$(OC) --only-keep-debug myos.bin myos.sym
+	$(OC) --strip-debug myos.bin
+
 #Remove executables and object files
 clean : 
 	$(RM) myos.bin
+	$(RM) myos.sym
 	$(foreach DIR, $(SRCDIRS), $(RM) $(DIR)/*.o)
