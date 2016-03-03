@@ -159,7 +159,6 @@ void shell_interpreter(char *command)
 void InitializeShell()
 {
     terminal_writestring("MatoOS\n");
-    terminal_writestring("Gymnazium Ivana Kupca Hlohovec\n");
     terminal_writestring("Pre pomoc pouzi prikaz help\n");
 
     shell_clear();

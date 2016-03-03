@@ -3,6 +3,7 @@ UNAME_S := $(shell uname -s)
 
 #Cross compiler location
 CROSS_PREFIX := ~/opt/cross/bin/i686-elf-
+CROSS_PREFIX := i386-elf-
 
 #If system is linux
 ifeq ($(UNAME_S),Linux)
@@ -16,9 +17,9 @@ endif
 #If system is mac
 ifeq ($(UNAME_S),Darwin)
 	CC := $(CROSS_PREFIX)gcc
-    AA := /usr/local/bin/nasm
+    AA := nasm
     LD := $(CROSS_PREFIX)gcc
-	CT := /usr/local/Cellar/ctags/5.8/bin/ctags
+	CT := ctags
 	OC := $(CROSS_PREFIX)objcopy
 endif
 
